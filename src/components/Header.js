@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <>
-      <div className=" sm:px-7 sm:py-3 px-2 py-0 h-16 flex justify-between shadow-xl items-center bg-black">
+      <div className=" sm:px-7 sm:py-3 px-2 py-0 h-16 flex justify-between shadow-2xl items-center bg-black">
         <h1 className="text-center sm:text-lg font-bold text-yellow-500  px-2 md:py2 rounded-xl ">
           OTT-Sphere
         </h1>
