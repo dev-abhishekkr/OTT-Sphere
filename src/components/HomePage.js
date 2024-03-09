@@ -1,14 +1,16 @@
-import React from "react";
 import Header from "./Header";
 import MoviesContainer from "./MoviesContainer";
+import usePopularMovies from "./../customHooks/usePopularMovies";
+import useLatestMovies from "../customHooks/useLatestMovies";
 
 function HomePage() {
+  usePopularMovies();
+  useLatestMovies();
   return (
     <>
       <Header />
       <div>
         <div>
-          <h1>Latest Movies</h1>
           <MoviesContainer />
         </div>
       </div>
