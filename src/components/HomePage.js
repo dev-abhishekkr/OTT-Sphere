@@ -1,31 +1,27 @@
-import Header from "./Header";
-import MoviesContainer from "./MoviesContainer";
-import usePopularMovies from "./../customHooks/usePopularMovies";
-import useLatestMovies from "../customHooks/useLatestMovies";
-import useUpcomingMovies from "../customHooks/useUpcomingMovies";
-import useTopRatedMovies from "../customHooks/useTopRatedMovies";
-import Footer from "./Footer";
+import React from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import SearchResultPage from "./SearchResultPage";
+import Browse from "./Browse";
+import NotFoundPage from "./NotFoundPage";
 
-function HomePage() {
-  usePopularMovies();
-  useLatestMovies();
-  useUpcomingMovies();
-  useTopRatedMovies();
+const HomePage = () => {
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Browse />,
+      errorElement: <NotFoundPage />,
+    },
+    {
+      path: "/search-results",
+      element: <SearchResultPage />,
+    },
+  ]);
+
   return (
-    <>
-      <div className="bg-black">
-        <div className="">
-          <Header />
-        </div>
-        <div>
-          <MoviesContainer />
-        </div>
-        <div>
-          <Footer />
-        </div>
-      </div>
-    </>
+    <RouterProvider router={appRouter}>
+      <div>HomePage</div>
+    </RouterProvider>
   );
-}
+};
 
 export default HomePage;
