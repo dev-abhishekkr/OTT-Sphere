@@ -4,6 +4,7 @@ import SearchResultPage from "./SearchResultPage";
 import Browse from "./Browse";
 import NotFoundPage from "./NotFoundPage";
 import NoMoviesFound from "./NoMoviesFound";
+import MovieDetails from "./MovieDetails";
 
 const HomePage = () => {
   const appRouter = createBrowserRouter([
@@ -15,6 +16,11 @@ const HomePage = () => {
     {
       path: "/search-results",
       element: <SearchResultPage />,
+      errorElement: <NoMoviesFound />,
+    },
+    {
+      path: "/movie-details/:id",
+      element: <MovieDetails />,
       errorElement: <NoMoviesFound />,
     },
   ]);
