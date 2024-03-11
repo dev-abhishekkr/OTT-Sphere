@@ -20,10 +20,10 @@ function Header() {
       );
       const data = await response.json();
       console.log(data.results);
+      navigate("/search-results");
       if (data.results) {
         dispatch(addSearchResults(data.results));
         // history.push("/search-results");
-        navigate("/search-results");
       } else {
       }
     } catch (error) {
@@ -31,14 +31,20 @@ function Header() {
     }
     <Navigate to={"/search-results"} />;
   };
-
+  const handleClick = () => {
+    navigate("/");
+  };
   return (
     <>
       <div className=" sm:px-7 sm:py-3 px-2 py-0 h-16 flex justify-between shadow-2xl items-center bg-black">
-        <h1 className="text-center sm:text-lg font-bold text-yellow-500  px-2 md:py2 rounded-xl ">
+        <h1
+          className="text-center sm:text-lg font-bold text-yellow-500  px-1 sm:px-2 
+         border border-yellow-700 rounded-lg py-2 cursor-pointer hover:bg-yellow-500 hover:text-black  "
+          onClick={handleClick}
+        >
           OTT-Sphere
         </h1>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="flex space-x-2 items-center">
             <input
               type="text"
@@ -48,15 +54,16 @@ function Header() {
               onChange={(e) => setQuery(e.target.value)}
             />
             <button
-              className="h-[2.7rem] sm:h-full bg-yellow-500 px-2 sm:px-5 sm:py-2 rounded-xl text-lg"
+              className="h-[2.7rem] sm:h-full bg-yellow-500 px-2 sm:px-5 sm:py-2 rounded-xl text-lg hover:bg-yellow-300"
               onClick={handleSearch}
             >
               Search
             </button>
           </div>
         </form>
+        {error && <p>{error}</p>}
       </div>
-      <hr />
+      <hr className="text-yellow-500" />
     </>
   );
 }
