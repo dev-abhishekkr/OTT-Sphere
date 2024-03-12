@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import MoviesList from "./MoviesList";
@@ -6,15 +6,24 @@ import MoviesList from "./MoviesList";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { IMG_CDN_URL } from "../utils/constants";
+import Trailer from "./Trailer";
 
 function MovieDetails({ details }) {
   const movies = useSelector((store) => store.movies);
 
   const location = useLocation();
   const { extendedDetails } = location.state || {};
-  const { poster_path, title, overview, release_date, vote_average } =
+  const { poster_path, title, overview, release_date, vote_average, id } =
     extendedDetails;
+  const [showTrailer, setShowTrailer] = useState(false);
+  // console.log(extendedDetails);
 
+  const handleTrailerClick = () => {
+    setShowTrailer(true);
+  };
+  const handleHideTrailerClick = () => {
+    setShowTrailer(false);
+  };
   return (
     <>
       <Header />
@@ -46,6 +55,7 @@ function MovieDetails({ details }) {
                 <h1
                   className="sm:w-2/5 bg-yellow-500 text-black px-5 py-2 rounded-full text-lg
                  font-semibold cursor-pointer hover:bg-orange-400"
+                  onClick={handleTrailerClick}
                 >
                   Watch Trailer
                 </h1>
@@ -58,6 +68,22 @@ function MovieDetails({ details }) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="absolute top-20 right-3 ">
+          {showTrailer && (
+            <>
+              <div className="text-end mb-5">
+                <button
+                  className="bg-yellow-500 text-black px-5 py-2 rounded-full text-lg
+                 font-semibold cursor-pointer hover:bg-red-400"
+                  onClick={handleHideTrailerClick}
+                >
+                  Hide Trailer
+                </button>
+              </div>
+              <Trailer movieId={id} />
+            </>
+          )}
         </div>
         <div className="mt-10">
           <hr />
